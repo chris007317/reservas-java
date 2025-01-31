@@ -1,0 +1,1 @@
+INSERT INTO personas ('dni_persona', 'celular_persona', 'nombre_persona', 'apellido_materno_persona', 'apellido_paterno_persona', 'correo_persona') VALUES ('72884584', '978546213', 'Christian', 'Vilca', 'Justiniano', 'cristian0073@hotmail.com');
