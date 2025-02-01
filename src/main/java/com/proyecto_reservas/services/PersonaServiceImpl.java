@@ -13,7 +13,6 @@ import com.proyecto_reservas.entities.Persona;
 import com.proyecto_reservas.repositories.PersonaRepository;
 
 
-
 @Service
 public class PersonaServiceImpl implements PersonaService {
 	
@@ -103,4 +102,39 @@ public class PersonaServiceImpl implements PersonaService {
 	        throw new RuntimeException("No se pudo actualizar la persona. Por favor, inténtelo nuevamente.");
 	    }
 	}
+	
+	@Override
+	public PersonaResponse SeleccionarPersonaId(Long id) {
+		Persona persona = personaRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Persona no encontrada con el id: " + id));
+        return PersonaResponse.builder()
+                .id(persona.getId())
+                .dni(persona.getDni())
+                .nombre(persona.getNombre())
+                .apellidoPaterno(persona.getApellidoPaterno())
+                .apellidoMaterno(persona.getApellidoMaterno())
+                .celular(persona.getCelular())
+                .correo(persona.getCorreo())
+                .build();
+	}
+	
+	@Override
+	public Optional<PersonaResponse> BuscarPersonaDni(String dni) {
+	    Persona persona = personaRepository.findByDni(dni);
+	    if (persona == null) {
+	        throw new RuntimeException("Persona no encontrada con el DNI: " + dni);
+	    }
+	    PersonaResponse personaResponse = PersonaResponse.builder()
+	            .id(persona.getId())
+	            .dni(persona.getDni())
+	            .nombre(persona.getNombre())
+	            .apellidoPaterno(persona.getApellidoPaterno())
+	            .apellidoMaterno(persona.getApellidoMaterno())
+	            .celular(persona.getCelular())
+	            .correo(persona.getCorreo())
+	            .build();
+
+	    return Optional.of(personaResponse);
+	}
+	
 }

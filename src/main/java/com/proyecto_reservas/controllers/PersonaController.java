@@ -1,6 +1,7 @@
 package com.proyecto_reservas.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,9 +44,33 @@ public class PersonaController {
 	public ResponseEntity<?> EditarPersona(@PathVariable Long id, @RequestBody PersonaRequest personaRequest) {
 	    try {
 	        PersonaResponse persona = personaService.EditarPersona(id, personaRequest);
-	        return new ResponseEntity<>(persona, HttpStatus.CREATED);
+	        return new ResponseEntity<>(persona, HttpStatus.OK);
 	    } catch (RuntimeException e) {
 	        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> SeleccionarPersonaId(@PathVariable Long id) {
+	    try {
+	        PersonaResponse persona = personaService.SeleccionarPersonaId(id);
+	        return new ResponseEntity<>(persona, HttpStatus.OK);
+	    } catch (RuntimeException e) {
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+	    }
+	} 
+	
+	@GetMapping("/buscar/{dni}")
+	public ResponseEntity<?> BuscarPersonaDni(@PathVariable String dni) {
+	    try {
+	        Optional<PersonaResponse> persona = personaService.BuscarPersonaDni(dni);
+	        if (persona.isPresent()) {
+	            return new ResponseEntity<>(persona.get(), HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>("Persona no encontrada.", HttpStatus.NOT_FOUND);
+	        }
+	    } catch (RuntimeException e) {
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 	    }
 	}
 }
