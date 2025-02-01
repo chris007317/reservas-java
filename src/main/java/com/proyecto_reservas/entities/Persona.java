@@ -40,10 +40,10 @@ public class Persona {
     @Column(name = "apellidoMaternoPersona", nullable = false, length = 100)
     private String apellidoMaterno;
 
-    @Column(name = "celularPersona", nullable = false, length = 9)
+    @Column(name = "celularPersona", nullable = true, length = 9)
     private String celular;
 
-    @Column(name = "correoPersona", nullable = false, length = 150)
+    @Column(name = "correoPersona", nullable = true, length = 150)
     private String correo;
 
     @CreationTimestamp
