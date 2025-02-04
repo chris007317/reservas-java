@@ -30,8 +30,9 @@ public class Empresa {
 	@Column(name = "idEmpresa")
     private Long id;
 	
+	//@ManyToOne 
 	@OneToOne
-    @JoinColumn(name = "idEmpresaPersona", referencedColumnName = "idPersona", nullable = false)
+    @JoinColumn(name = "idEmpresaPersona", referencedColumnName = "idPersona", nullable = true)
     private Persona persona;
 	
 	@Column(name = "nombreEmpresa", nullable = false, length = 100 )

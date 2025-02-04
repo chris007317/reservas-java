@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto_reservas.dtos.requests.EmpresaRequest;
@@ -42,4 +44,23 @@ public class EmpresaController {
 		}
 	}
 	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> EditarEmpresa(@PathVariable Long id, @RequestBody EmpresaRequest empresaRequest){
+		try {
+	        EmpresaResponse empresa = empresaService.EditarEmpresa(id, empresaRequest);
+	        return new ResponseEntity<>(empresa, HttpStatus.CREATED);
+	    } catch (RuntimeException e) {
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }		
+	}
+	
+	@PutMapping("/eliminar/{id}")
+	public ResponseEntity<?> EliminarEmpresa(@PathVariable Long id, @RequestParam boolean estado){
+		try {
+	        empresaService.EliminarEmpresa(id, estado);
+	        return new ResponseEntity<>("Empresa Eliminada con exito", HttpStatus.OK);
+	    } catch (RuntimeException e) {
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
+	}
 }

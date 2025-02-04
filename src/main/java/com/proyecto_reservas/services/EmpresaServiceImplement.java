@@ -49,4 +49,35 @@ public class EmpresaServiceImplement implements EmpresaService{
 				.orElseThrow(() -> new RuntimeException("No se encontró empresa con el id: " + id));
 		return EmpresaMapper.mapper.empresaResponse(empresa);
 	}
+	
+	@Override
+	public EmpresaResponse EditarEmpresa(Long id, EmpresaRequest empresaRequest) {
+		try {
+			Empresa empresa = empresaRepository.findById(id)
+					.orElseThrow(() -> new RuntimeException("No se encontró empresa con el id: " + id));
+			Persona persona = personaRepository.findById(empresaRequest.getIdPersona())
+					.orElseThrow(() -> new RuntimeException("Persona no encontrada con el id: " + empresaRequest.getIdPersona()));
+			EmpresaMapper.mapper.actualizarEmpresa(empresa, empresaRequest);
+			empresa.setPersona(persona);
+			empresaRepository.save(empresa);
+
+			return EmpresaMapper.mapper.empresaResponse(empresa);
+		}catch (Exception e) {
+			System.err.println("Error al actualizar la empresa: " + e.getMessage());
+	        throw new RuntimeException("No se pudo actualizar los datos de la empresa. Por favor, inténtelo nuevamente.");
+		}
+	}
+	
+	@Override
+	public void EliminarEmpresa(Long id, boolean estado) {
+		try {
+			Empresa empresa = empresaRepository.findById(id)
+					.orElseThrow(() -> new RuntimeException("No se encontró empresa con el id: " + id));
+			empresa.setEstado(estado);
+			empresaRepository.save(empresa);
+		}catch (Exception e) {
+			System.err.println("Error al elimnar la empresa: " + e.getMessage());
+	        throw new RuntimeException("No se pudo eliminar los datos de la empresa. Por favor, inténtelo nuevamente.");
+		}
+	}
 }
