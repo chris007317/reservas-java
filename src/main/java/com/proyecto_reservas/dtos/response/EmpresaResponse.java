@@ -23,5 +23,4 @@ public class EmpresaResponse {
 	
     private String direccion;
     
-    private boolean estado;
 }

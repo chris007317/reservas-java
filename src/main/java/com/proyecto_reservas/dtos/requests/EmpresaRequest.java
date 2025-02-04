@@ -19,7 +19,7 @@ public class EmpresaRequest {
 	
     private String direccion;
     
-    private Integer usuarioEdicion = 1;
+    private Integer usuarioEdicion;
     
     private Boolean estado = true;
 }
