@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.proyecto_reservas.dtos.PersonaMapper;
 import com.proyecto_reservas.dtos.requests.PersonaRequest;
 import com.proyecto_reservas.dtos.response.PersonaResponse;
 import com.proyecto_reservas.entities.Persona;
@@ -107,15 +108,7 @@ public class PersonaServiceImpl implements PersonaService {
 	public PersonaResponse SeleccionarPersonaId(Long id) {
 		Persona persona = personaRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Persona no encontrada con el id: " + id));
-        return PersonaResponse.builder()
-                .id(persona.getId())
-                .dni(persona.getDni())
-                .nombre(persona.getNombre())
-                .apellidoPaterno(persona.getApellidoPaterno())
-                .apellidoMaterno(persona.getApellidoMaterno())
-                .celular(persona.getCelular())
-                .correo(persona.getCorreo())
-                .build();
+		return PersonaMapper.mapper.personaResponse(persona);
 	}
 	
 	@Override
