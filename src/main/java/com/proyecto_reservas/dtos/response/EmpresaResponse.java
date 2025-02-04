@@ -1,7 +1,9 @@
 package com.proyecto_reservas.dtos.response;
 
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Getter
 public class EmpresaResponse {
 
@@ -21,5 +23,5 @@ public class EmpresaResponse {
 	
     private String direccion;
     
-    private Integer usuarioEdicion;
+    private boolean estado;
 }

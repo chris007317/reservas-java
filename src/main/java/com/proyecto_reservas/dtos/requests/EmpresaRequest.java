@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class EmpresaRequest {
 	
-	private String dni;
+	private Long idPersona;
 	
     private String nombre;
 
@@ -19,5 +19,7 @@ public class EmpresaRequest {
 	
     private String direccion;
     
-    private Integer usuarioEdicion;
+    private Integer usuarioEdicion = 0;
+    
+    private Boolean estado = true;
 }

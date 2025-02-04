@@ -64,8 +64,8 @@ public class PersonaServiceImpl implements PersonaService {
 			return respuesta;
 		}
 		catch (Exception e) {
-	        System.err.println("Error al registrar la empresa: " + e.getMessage());
-	        throw new RuntimeException("No se pudo registrar la empresa. Por favor, inténtelo nuevamente.");
+	        System.err.println("Error al registrar la persona: " + e.getMessage());
+	        throw new RuntimeException("No se pudo registrar la persona. Por favor, inténtelo nuevamente.");
 	    }
 	}
 	
