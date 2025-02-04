@@ -45,16 +45,16 @@ public class EmpresaServiceImplement implements EmpresaService{
 	
 	@Override 
 	public EmpresaResponse SeleccionarEmpresa(Long id) {
-		Empresa empresa = empresaRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("No se encontró empresa con el id: " + id));
+		Empresa empresa = empresaRepository.findByIdAndEstado(id, true);
+		if(empresa == null) throw new RuntimeException("No se encontró empresa con el id: " + id);
 		return EmpresaMapper.mapper.empresaResponse(empresa);
 	}
 	
 	@Override
 	public EmpresaResponse EditarEmpresa(Long id, EmpresaRequest empresaRequest) {
 		try {
-			Empresa empresa = empresaRepository.findById(id)
-					.orElseThrow(() -> new RuntimeException("No se encontró empresa con el id: " + id));
+			Empresa empresa = empresaRepository.findByIdAndEstado(id, true);
+			if(empresa == null) throw new RuntimeException("No se encontró empresa con el id: " + id);
 			Persona persona = personaRepository.findById(empresaRequest.getIdPersona())
 					.orElseThrow(() -> new RuntimeException("Persona no encontrada con el id: " + empresaRequest.getIdPersona()));
 			EmpresaMapper.mapper.actualizarEmpresa(empresa, empresaRequest);
@@ -69,11 +69,12 @@ public class EmpresaServiceImplement implements EmpresaService{
 	}
 	
 	@Override
-	public void EliminarEmpresa(Long id, boolean estado) {
+	public void EliminarEmpresa(Long id, boolean estado, int idUsuario) {
 		try {
-			Empresa empresa = empresaRepository.findById(id)
-					.orElseThrow(() -> new RuntimeException("No se encontró empresa con el id: " + id));
+			Empresa empresa = empresaRepository.findByIdAndEstado(id, true);
+			if(empresa == null) throw new RuntimeException("No se encontró empresa con el id: " + id);
 			empresa.setEstado(estado);
+			empresa.setUsuarioEdicion(idUsuario);
 			empresaRepository.save(empresa);
 		}catch (Exception e) {
 			System.err.println("Error al elimnar la empresa: " + e.getMessage());

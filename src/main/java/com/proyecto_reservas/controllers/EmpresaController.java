@@ -55,9 +55,9 @@ public class EmpresaController {
 	}
 	
 	@PutMapping("/eliminar/{id}")
-	public ResponseEntity<?> EliminarEmpresa(@PathVariable Long id, @RequestParam boolean estado){
+	public ResponseEntity<?> EliminarEmpresa(@PathVariable Long id, @RequestParam int idUsuario){
 		try {
-	        empresaService.EliminarEmpresa(id, estado);
+	        empresaService.EliminarEmpresa(id, false, idUsuario);
 	        return new ResponseEntity<>("Empresa Eliminada con exito", HttpStatus.OK);
 	    } catch (RuntimeException e) {
 	        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

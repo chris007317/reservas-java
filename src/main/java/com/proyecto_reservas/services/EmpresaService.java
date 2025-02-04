@@ -12,5 +12,5 @@ public interface EmpresaService {
 	
 	public EmpresaResponse EditarEmpresa(Long id, EmpresaRequest empresaRequest);
 	
-	public void EliminarEmpresa(Long id, boolean estado);
+	public void EliminarEmpresa(Long id, boolean estado, int idUsuario);
 }
