@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +29,10 @@ public class Cancha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCancha")
     private Long id;
+	
+	@ManyToOne
+    @JoinColumn(name = "idCanchaLocal", referencedColumnName = "idLocal", nullable = true)
+    private Local local;
 	
 	@Column(name = "nombreCancha", nullable = false, length = 100 )
     private String nombre;

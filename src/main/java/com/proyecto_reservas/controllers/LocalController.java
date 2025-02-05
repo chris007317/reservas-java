@@ -64,7 +64,7 @@ public class LocalController {
 		}
 	}
 	
-	@PutMapping("eliminar/{id}")
+	@PutMapping("/eliminar/{id}")
 	public ResponseEntity<?> EliminarLocal(@PathVariable Long id, @RequestParam int idUsuario) {
 		try {
 			localService.EliminarLocal(id, idUsuario);
