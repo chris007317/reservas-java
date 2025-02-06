@@ -1,6 +1,7 @@
 package com.proyecto_reservas.dtos;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import com.proyecto_reservas.dtos.response.PersonaResponse;

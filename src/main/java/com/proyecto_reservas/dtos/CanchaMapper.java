@@ -14,7 +14,7 @@ import com.proyecto_reservas.entities.Cancha;
 @Mapper(componentModel = "spring")
 public interface CanchaMapper {
 	CanchaMapper mapper = Mappers.getMapper( CanchaMapper.class );
-	
+
 	Cancha cancha(CanchaRequest canchaRequest);
 	
 	@Mapping(target = "local.id", source = "local.id")

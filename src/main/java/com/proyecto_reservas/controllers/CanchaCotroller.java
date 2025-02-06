@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto_reservas.dtos.requests.CanchaRequest;
 import com.proyecto_reservas.dtos.response.CanchaResponse;
-import com.proyecto_reservas.repositories.CanchaRepository;
 import com.proyecto_reservas.services.CanchaService;
 
 @RestController
