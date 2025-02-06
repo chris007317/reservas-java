@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.proyecto_reservas.dtos.PersonaMapper;
@@ -130,4 +132,8 @@ public class PersonaServiceImpl implements PersonaService {
 	    return Optional.of(personaResponse);
 	}
 	
+	@Override
+	public Page<Persona> paginadoListarPersona(Pageable pageable){
+		return personaRepository.findAll(pageable);
+	}
 }
